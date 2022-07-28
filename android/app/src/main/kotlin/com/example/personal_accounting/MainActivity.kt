@@ -1,4 +1,4 @@
-package com.example.personal_accounting
+package com.personalAccountings
 
 import io.flutter.embedding.android.FlutterActivity
 

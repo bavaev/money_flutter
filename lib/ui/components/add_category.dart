@@ -58,6 +58,7 @@ class __AddCategoryDialogState extends State<_AddCategoryDialog> {
                   height: 30,
                 ),
                 TextFormField(
+                  key: const Key('keyFieldNameCategory'),
                   controller: _category,
                   validator: (value) {
                     if (value == null || value.isEmpty) return 'Введите название категории';
@@ -77,6 +78,7 @@ class __AddCategoryDialogState extends State<_AddCategoryDialog> {
                   builder: (context, state) {
                     return state is ColorChoised
                         ? ElevatedButton(
+                            key: const Key('keyChoiseColor'),
                             onPressed: () => showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -146,6 +148,7 @@ class __AddCategoryDialogState extends State<_AddCategoryDialog> {
                   height: 30,
                 ),
                 ElevatedButton(
+                    key: const Key('keyAddCategory'),
                     child: const FittedBox(child: Text("Добавить")),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {

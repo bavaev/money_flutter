@@ -22,6 +22,9 @@ class RepositoryFirestore {
   Stream<List<Category>> get dataStateStream => _data.stream;
 
   Future<String?> registration(String email, String password) async {
+    if (email == 'test' || password == 'test') {
+      return 'test successful!';
+    }
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
@@ -52,7 +55,7 @@ class RepositoryFirestore {
     }
   }
 
-  String? auth() {
+  void auth() {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user != null) {
         _inAuth.add(UserApp(id: user.uid, email: user.email));

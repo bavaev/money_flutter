@@ -121,53 +121,44 @@ class _ProfileState extends State<Profile> {
             ),
             BlocBuilder<AuthBloc, AuthState>(
               builder: (context, state) {
-                if (state is AuthAuthentificated) {
-                  return Flexible(
-                    child: Container(
-                      padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          FittedBox(
-                            child: Text(
-                              state.user!.email.toString(),
-                            ),
+                return Flexible(
+                  child: Container(
+                    padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FittedBox(
+                          child: Text(
+                            state is AuthAuthentificated ? state.user!.email.toString() : '',
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(top: 10),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 10),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            showConfirmDeleteDialog(
+                              context: context,
+                              type: 'deleteAllData',
+                            );
+                          },
+                          child: const FittedBox(child: Text('Очистить данные')),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            context.read<AuthBloc>().add(AuthSignout());
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const MyApp()), (route) => false);
+                          },
+                          style: ButtonStyle(
+                            minimumSize: MaterialStateProperty.all<Size>(const Size(180, 50)),
+                            backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF9053EB)),
                           ),
-                          TextButton(
-                            onPressed: () {
-                              showConfirmDeleteDialog(
-                                context: context,
-                                type: 'deleteAllData',
-                              );
-                            },
-                            child: const FittedBox(child: Text('Очистить данные')),
-                          ),
-                          BlocBuilder<AuthBloc, AuthState>(
-                            builder: (context, state) {
-                              return ElevatedButton(
-                                onPressed: () {
-                                  context.read<AuthBloc>().add(AuthSignout());
-                                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const MyApp()), (route) => false);
-                                },
-                                style: ButtonStyle(
-                                  minimumSize: MaterialStateProperty.all<Size>(const Size(180, 50)),
-                                  backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF9053EB)),
-                                ),
-                                child: state is AuthAuthentificated ? const FittedBox(child: Text('Выйти')) : const CircularProgressIndicator(),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
+                          child: state is AuthAuthentificated ? const FittedBox(child: Text('Выйти')) : const CircularProgressIndicator(),
+                        )
+                      ],
                     ),
-                  );
-                }
-                return const Center(
-                  child: CircularProgressIndicator(),
+                  ),
                 );
               },
             ),

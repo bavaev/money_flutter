@@ -23,10 +23,14 @@ dependencies:
   month_picker_dialog: ^0.4.0
   image_picker: ^0.8.5+3
   cached_network_image: ^3.2.1
+  bloc_test: ^9.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_driver:
+    sdk: flutter
+  test: any
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -35,6 +39,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   flutter_launcher_icons: ^0.9.3
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

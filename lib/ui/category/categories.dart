@@ -65,6 +65,7 @@ class _CategoriesState extends State<Categories> {
               ),
             ),
             IconButton(
+              key: const Key('keyNewCategory'),
               onPressed: () {
                 showAddCategory(
                   context: context,
